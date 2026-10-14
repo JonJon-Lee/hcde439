@@ -4,15 +4,41 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
 
-    <title>Example Student's HCDE 439 Physical Computing Page!</title>
+    <title>Jonathan Lee's HCDE 439 Physical Computing Page!</title>
 
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Example Student's Assignment 1!</h1>
+    <h1>Jonathan Lee's Assignment 1!</h1>
     <div class="header">
-      <img src="red-panda.jpg" />
-      <p>Here is all the documentation for assignment 1!</p>
+      <img src="20261013_180232.gif" />
+    </div>
+    <div>
+      <img src="AISelect_20261013_180303_Samsung_Notes.jpg" />
+    </div>
+    <div>
+      <img src="Screenshot 2026-10-13 183043.png"
+    </div>
+    <div>
+      <p> Questions: <br> <strong> 1. Draw a raph where the X axis is time and the Y axis is voltage across the LEDs. Draw a line for each of your 3 LEDs.</strong>
+      </p>
+    </div>
+    <div>
+      <img src="AISelect_20261013_180349_Samsung_Notes.jpg" />
+    </div>
+    <div>
+      <p> <strong> 2. How many LEDs could you blink independently with your arduino? How much current would that draw? </strong> 
+        <br> <br> There are 14 digital pins and 6 analog pins that can be used to blink up to 20 LEDs 
+        independently. Individually, each pin can supply about 20 mA to light up an LED, however, 
+        the Arduino has a limit of 200mA. This means that we cannot blink all of the LEDs at maximum brightness, 
+        but we can calculate how much current each LED should get. Given we have a limit of 200mA and 20 pins, 
+        that means each LED should be getting 10mA of current.  Assuming that we use red LEDs that use 2V, 
+        then we can figure that (5-2)/0.010 = 300 ohms of resistance per pin.
+        <br> <strong> 3. How fast do you need to blink your LEDs until you no onger can tell that they are blinking? </strong>
+        <br> <br> After trial and error, I found that for me, having a delay of 10ms between blinks is how fast I need to blink my LED before I can no longer 
+        tell that they are blinking.
+        <br> <br> <strong> 4. Did you use AI tools in completing this assignment? if yes, please provide details no how/when, as well as a brief refelction. If no, you can either leave this question blank or provide other informatino if you'd like. </strong>
+      </p>
     </div>
   </body>
 </html>
