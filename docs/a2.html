@@ -4,15 +4,116 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
 
-    <title>Example Student's HCDE 439 Physical Computing Page!</title>
+    <title>Jonathan Lee's HCDE 439 Physical Computing Page!</title>
 
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Example Student's Assignment 2!</h1>
+    <h1>Jonathan Lee's Assignment 2!</h1>
     <div class="header">
-      <img src="red-panda.jpg" />
-      <p>Here is all the documentation for assignment 2!</p>
+      <img src="a2 gif.gif" />
+      <img src="20261020_191656.jpg" />
+    </div>
+    <div>
+      <img src="image0.jpg" />
+    </div>
+    <div>
+      <code>
+        Code Chunk
+        <br>// Sets pin 9 to "fadePin"
+        <br>const int fadePin = 9;
+        <br>// Sets pin 7 to "btnPin"
+        <br>const int btnPin = 7;
+        
+        <br>void setup() {
+          <br>  // Sets fadePin to output
+          <br>  pinMode(fadePin, OUTPUT);
+          <br>  // Sets btnPin to input
+          <br>  pinMode(btnPin, INPUT);
+          <br>  //sets pin 2 to output
+          <br>  pinMode(2, OUTPUT);
+          <br>  // sets pin 3 to output
+          <br>  pinMode(3, OUTPUT);
+          <br>  // sets pin 4 to output
+          <br>  pinMode(4, OUTPUT);
+        <br>}
+
+        <br>void loop() {
+          <br>  // reads btnPin if it's pressed
+          <br>  if (digitalRead(btnPin) == HIGH) {
+            <br>    // If the button is pressed, it runs a for loops that loops 3 times
+            <br>    for (int i = 0; i < 3; i++) {
+              <br>      // turns on pin/led 1
+              <br>      digitalWrite(2, HIGH);
+              <br>      // delay for 150 ms
+              <br>      delay(150);
+              <br>      // turns on pin/led 2
+              <br>      digitalWrite(3, HIGH);
+              <br>      // turns on pin/led 1
+              <br>      digitalWrite(2, LOW);
+              <br>      // delay for 150 ms
+              <br>      delay(150);
+              <br>      // turns on pin/led 3
+              <br>      digitalWrite(4, HIGH);
+              <br>      // turns off pin/led 2
+              <br>      digitalWrite(3, LOW);
+              <br>      // delay for 150 ms
+              <br>      delay(150);
+              <br>      // turns off pin/led 3
+              <br>      digitalWrite(4, LOW);
+            <br>    }
+            <br>    // if the button isn't pressed, then it runs the following code
+          <br>  } else {
+            <br>    // creates an integer object "b" and if it's equal to 0
+            <br>    // then it will repeat and increment by 5 until it reaches 255
+            <br>    for (int b = 0; b <= 255; b += 5) {
+              <br>      // turns fadePin on at "b" analog value
+              <br>      analogWrite(fadePin, b);
+              <br>      // delay 10ms
+              <br>      delay(10);
+            <br>    }
+            <br>    // creates an integer object "b" and if it's equal to 255
+            <br>    // then it will repeat and increment by -5 until it reaches 255
+            <br>    for (int b = 255; b >= 0; b -= 5) {
+              <br>      // turns fadePin on at "b" analog value
+              <br>      analogWrite(fadePin, b);
+              <br>      // delay 10ms
+              <br>      delay(10);
+            <br>    }
+          <br>  }
+        <br>}
+      </code>
+    </div>
+    <div>
+      <p> <strong> Questions:
+        <br> 1: Draw a chart where the X axis is time and the Y axis is voltage. 
+        Draw 3 lines representing the voltage across an LED with analogWrite(led, 64), 
+        analogWrite(led, 128), and analogWrite(led, 255). </strong> </p>
+    </div>
+    <div>
+      <img src="AISelect_20261020_200245_Samsung_Notes.jpg" />
+    </div>
+    <div>
+      <p>
+        <strong>2:  If all your LEDs were on simultaneously, 
+          what would the total current draw be? Is this above or below the 
+          total Arduino current draw limits? If all your LEDs were on, 
+          how long would your circuit run if powered by a 1200 mAh battery?</strong>
+          <br> Based on my calculations, each LED should draw 20 mA of current each. with
+          all 4 LEDs on simultaneously, it would have a total current draw of 80 mA.
+          This is right at the per pin limit of 20mA on the arduino, as well as below the 150 mA chip total.
+          If all of the LEDs were on and the circuit runs on a 1200 mAh battery, it would run for 1200/80 = 15 hours.
+          <br> <br> <strong> 3: Measure and record the actual voltage across one of your LEDs when it's on. 
+            How does this compare to the theoretical forward voltage for your LED color? </strong>
+            <br> I measured 1.98 V across the LED while it was lit, which isn't too far off of the 
+            theoretical forward voltage of a red LED (2V). This is a difference of 0.02V which is about 1%. 
+            This difference is within normal variation for the LED and multimeter accuracy. 
+            <br><br> <strong> 4: Did you use AI tools in completing this assignment? 
+              If yes, please provide details on how/when, as well as a brief reflection. 
+              If no, you can either leave this question blank, or provide other information 
+              if you'd like.</strong>
+              <br> no.
+      </p>
     </div>
   </body>
 </html>
