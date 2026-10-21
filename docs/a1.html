@@ -12,13 +12,40 @@
     <h1>Jonathan Lee's Assignment 1!</h1>
     <div class="header">
       <img src="20261013_180232.gif" />
+      <img src="Screenshot 2026-10-20 194348.png" />
     </div>
     <div>
       <img src="AISelect_20261013_180303_Samsung_Notes.jpg" />
     </div>
-    <div>
-      <img src="Screenshot 2026-10-13 183043.png"
-    </div>
+    <code>
+      Code Chunk
+      <br>void setup() {
+        <br>pinMode(11, OUTPUT);
+        <br>pinMode(10, OUTPUT);
+        <br>pinMode(9, OUTPUT);
+      <br>}
+      
+      <br>void loop() {
+        <br>//Ensures that the third LED is off at the start of the cycle.
+        <br>digitalWrite(9, LOW);
+        <br>//Turns on the first LED.
+        <br>digitalWrite(11, HIGH);
+        <br>//Delay between blinks.
+        <br>delay(500);
+        <br>//Turns off first LED.
+        <br>digitalWrite(11, LOW);
+        <br>//Turns on second LED.
+        <br>digitalWrite(10, HIGH);
+        <br>//Dealy between blinks.
+        <br>delay(500);
+        <br>//Turns off second LED.
+        <br>digitalWrite(10, LOW);
+        <br>//Turns on third LED.
+        <br>digitalWrite(9, HIGH);
+        <br>//Delay between blinks.
+        <br>delay(500);
+      <br>}
+    </code>
     <div>
       <p> Questions: <br> <strong> 1. Draw a raph where the X axis is time and the Y axis is voltage across the LEDs. Draw a line for each of your 3 LEDs.</strong>
       </p>
