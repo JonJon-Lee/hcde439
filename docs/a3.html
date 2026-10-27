@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+    <title>Jonathan Lee's HCDE 439 Physical Computing Page!</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Jonathan Lee's Assignment 2!</h1>
+    <div class="header">
+      <img src="20261026_233804.gif" />
+      <img src="20261026_223623.jpg" />
+    </div>
+    <div>
+      <img src="AISelect_20261027_010407_Samsung_Notes.jpg" />
+    </div>
+    <div>
+      <code>
+        Code Chunk
+<br>void setup() {
+<br>// sets up serial communication.
+<br>Serial.begin(9600);
+<br>// sets pin A0 to input for photoresistor.
+<br>pinMode(A0, INPUT);
+<br>// sets pin 11 as output for LED.
+<br>pinMode(11, OUTPUT);
+<br>// sets pin 10 as output for LED.
+<br>pinMode(10, OUTPUT);
+<br>// sets pin 9 as output for LED.
+<br>pinMode(9, OUTPUT);
+<br>}
+<br>
+<br>void loop() {
+<br>// Assigns values read from A0 to variable.
+<br>int sensorValue = analogRead(A0);
+<br>// Constrains values from sensorValue variable between 20 and 750.
+<br>int sensVal = constrain(sensorValue, 20, 750);
+<br>// Converts values from sensVal to 0 to 255 to read as outputs for LED.
+<br>int outputValue = map(sensVal, 20, 750, 0, 255);
+<br>
+<br>// Runs the following code if outputValue reads below 85
+<br>if (outputValue == 85) {
+<br>// Turns pin 9/LED 1 on at outputValue brightness.
+<br>analogWrite(9, outputValue);
+<br>// Ensures pin 10 is off.
+<br>analogWrite(10, 0);
+<br>// Ensures pin 11 is off.
+<br>analogWrite(11, 0);
+<br>// Runs the following code if outputValue reads from 85 to 169
+<br>} else if (outputValue == 85 && outputValue < 170) {
+<br>// Turns pin 9/LED 1 on at outputValue brightness.
+<br>analogWrite(9, outputValue);
+<br>// Turns pin 10/LED 2 on at outputValue brightness.
+<br>analogWrite(10, outputValue);
+<br>// Ensures pin 11 is off.
+<br>analogWrite(11, 0);
+<br>// Runs the following code if outputValue reads from 170 to 255
+<br>} else if (outputValue >= 170 && outputValue <= 255) {
+<br>// Turns pin 9/LED 1 on at outputValue brightness.
+<br>analogWrite(9, outputValue);
+<br>// Turns pin 10/LED 2 on at outputValue brightness.
+<br>analogWrite(10, outputValue);
+<br>// Turns pin 11/LED 3 on at outputValue brightness.
+<br>analogWrite(11, outputValue);
+<br>}
+<br>// Values were chosen as there were three LEDs set up, and divided the output value range equally by three.
+<br>// Prints the sensor value in the Serial Monitor to observe the sensor values.
+<br>Serial.println(sensorValue);
+<br>// Delays each sensor value print.
+<br>delay(100);
+<br>}
+      </code>
+    </div>
+    <div>
+      <p> <strong> Questions:
+        <br> 1: In your voltage divider, can the variable resistor be either R1 or R2 or does it need to be one or the other? 
+        Justify your answer with example calculations. </strong>
+        <br> The variable resistor can be either R1 or R2. The voltage divider formula is Vmeasuer = Vin x R2/(R1+R2). If the photoresistor is R1, then we would get:
+        <br> Bright: 5V x 10k ohm / (1k ohm + 10k ohm) = 4.55V
+        <br> Medium: 5V x 10k ohm / (20k ohm + 10k ohm) = 1.67V
+        <br> Dark: 5V x 10k ohm / (100k ohm + 10k ohm) = 0.45V
+        <br> If we were to put the photoresistor as R2, then we would get:
+        <br> Bright: 5V x 1k ohm / (10k ohm + 1k ohm) = 0.45V
+        <br> Medium: 5V x 20k ohm / (10k ohm + 20k ohm) = 3.33V
+        <br> Dark: 5V x 100k ohm / (10k ohm + 100k ohm) = 4.55V
+        <br> Both produce the same range of voltages, but in different directions. In my circuit, 
+        I have it set up witht he photoresistor as R1, so that a brighter light produces a higher voltage. If I had put it as R2, my circuit would function in reverse, where 
+        The the brigher the light, the dimmer the LED are, and in a darker environment, the LEDs will shine brighter.
+        <br><strong>2: Draw a graph where the x-axis is time and the y-axis is voltage. 
+            Plot the voltage at V-measure (where your pin is reading the voltage) of your voltage divider of your shared gif/video</strong>
+            <div>
+                <img src="AISelect_20261027_022351_Samsung_Notes.jpg">
+            </div>
+            </p>
+            <p>
+          <br><strong> 3: AnalogWrite and analogRead are respectively 8-bit and 10-bit values. 
+            Imagine you had 10-bit PWM and a 16-bit analog-to-digital converter instead. 
+            How would this change your map() code? Explain your answer.</strong>
+            <br> The analog-to-digital converter 10 bit range is 0 to 1023. A 16 bit range would be 0 to 65535. The PWM range for 8 bit is 0 to 255, and 10 bit is 0 to 1023.
+            If I were to use a 10 bit PWM and 16 bit analog-to-digital in my code, map() would look like
+            <br><code>int outputValue = map(sensVal, 0, 65535, 0, 1023)</code>
+      </p>
+    </div>
+  </body>
+</html>
