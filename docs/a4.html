@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+    <title>Jonathan Lee's HCDE 439 Physical Computing Page!</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Jonathan Lee's Assignment 4!</h1>
+    <div class="header">
+      <img src="20261105_183444.gif" />
+      <img src="20261105_183436.jpg" />
+    </div>
+    <div>
+      <img src="AISelect_20261105_195836_Samsung_Notes.jpg" />
+    </div>
+    <div>
+      <p> I used a 1M ohm resistor because I wanted the capacitive sensor to only activate when touched</p>
+      <code>
+        Code Chunk
+<br>// Include the Servo library so we can control the servo motor
+<br>#include <Servo.h>
+<br>// Include the CapacitiveSensor library so we can read touch
+<br>#include <CapacitiveSensor.h>
+<br>
+<br>// Create a servo object called myservo
+<br>Servo myservo;
+<br>
+<br>// Create the touch sensor. Pin 2 is the send pin and pin 4 is the receive pin
+<br>CapacitiveSensor cs_2_4 = CapacitiveSensor(2, 4);
+<br>
+<br>// Current servo angle, starts at 0
+<br>int pos = 0;
+<br>// Angle we want the servo to move to
+<br>int posOutput = 0;
+<br>
+<br>void setup() {
+<br>  // Turns off the library's auto recalibration so the baseline is stable
+<br>  cs_2_4.set_CS_AutoCal_Millis(0xFFFFFFFF);
+<br>  // Start serial so we can see sensor values
+<br>  Serial.begin(9600);
+<br>  // Sets the servo to pin 9
+<br>  myservo.attach(9);
+<br>  // Start the servo at 0 degrees
+<br>  myservo.write(pos);
+<br>}
+<br>
+<br>void loop() {
+<br>  // Reads the touch sensor
+<br>  long total = cs_2_4.capacitiveSensor(30);
+<br>  // Print the raw reading from the sensor
+<br>  Serial.println(total);
+<br>
+<br>  // Convert the sensor reading to from 0 to 180
+<br>  posOutput = map(total, 40, 1000, 0, 180);
+<br>  // Constrains values to the servo
+<br>  posOutput = constrain(posOutput, 0, 180);
+<br>
+<br>  // If the servo is below our target, it turns.
+<br>  if (pos < posOutput) {
+<br>    // Move up by 3 degrees
+<br>    pos += 3;
+<br>    // Ensures that it stops when it reaches the max
+<br>    if (pos > posOutput) {
+<br>      pos = posOutput;
+<br>    }
+<br>  }
+<br>  // Else it moves back to 0
+<br>  else if
+      </code>
+    </div>
+    <div>
+      <p> <strong> Questions:
+        <br>1: Say you are using a servo motor you attach to pin 9. In your loop() you have the following code:
+<code>
+  <br>void loop() {
+<br>for (pos = 0; pos <= 180; pos += 1) {
+  <br> myservo.write(pos); 
+  <br> delay(100); 
+  <br>}
+<br>}
+</code>
+<br>Draw a graph with the x-axis as time and the y-axis as voltage at pin 9 with respect to ground.
+</strong>
+</div>
+<div>
+  <img src="A4Graph.jpg" />
+  <p>Pin 9 sends a pulse every 20 ms. The wider the pulse, the further the servo turns.</p>
+</div>
+<div>
+<br> <strong> 2: Your input device is slightly broken, leading it to give us an erroneous reading 1% of the time. How can we address this? Answer in (pseudo)code.
+</strong>
+<code>
+  <br> a = readSensor();
+  <br> b = readSensor();
+  <br> c = readSensor();
+  <br> final = median(a, b, c);
+</code>
+<p><br> I'm using three value because if our 1% is high or low, then the median wouldn't be the issue.</p>
+<strong><br>3: Your input device is slightly noisy, leading the measurement to randomly deviate from the true measurement up or down by 10%. How can we address this? Answer in (pseudo)code.</strong>
+<br> <code>
+<br>  n = 10; // can be any number greater than around 3
+<br>  sum = 0;
+<br> for (int i = 0; i < n; i++) {
+  <br> sum += cs_2_4.capacitiveSensor(30);
+<br> }
+<br>  value = sum / n;
+</code>
+<br> Since the noise is random, with some values being high and low, if we average the values, it should cancel it out and bring us closer to the true value.
+<br><strong>4: Did you use AI tools in completing this assignment? If yes, please provide details on how/when, as well as a brief reflection. If you used an LLM, please 'share' your conversation and include it as part of your submission, or cite the prompt(s) you used and the output. If no, you can either leave this question blank, or provide other information if you'd like. </strong>
+<br> I did not use AI
+      </p>
+    </div>
+  </body>
+</html>
