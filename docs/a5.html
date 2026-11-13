@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+    <title>Jonathan Lee's HCDE 439 Physical Computing Page!</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Jonathan Lee's Assignment 4!</h1>
+    <div class="header">
+      <img src="20261112_152725.gif" />
+      <img src="20261112_152716.jpg" />
+    </div>
+    <div>
+      <img src="AISelect_20261112_173129_Samsung Notes.jpg" />
+    </div>
+    <div>
+      <p>220 ohm resistor between D9 and the gate limits the current spike when the pin charges the MOSFET gate. 
+        10 k ohm resistor from gate to ground keeps the gate at 0 V when D9 isn’t powering it, so the motor doesn't turn on whenever the arduino turns on or uploads code. 
+        1M ohm resistor because I wanted the capacitive sensor to only activate when touched.</p>
+      <code>
+        Code Chunk
+<br>// Include the library so we can read touch
+<br>#include <CapacitiveSensor.h>
+
+<br>// Create the touch sensor. Pin 4 is the send pin and pin 2 is the receive pin
+<br>CapacitiveSensor touchSensor = CapacitiveSensor(4, 2);
+
+<br>void setup() {
+ <br> // Set pin 9 as OUTPUT
+ <br> pinMode(9, OUTPUT);
+ <br> // Start serial communication so to read sensor values
+<br>  Serial.begin(9600);
+<br>}
+
+<br>void loop() {
+ <br> // Read the touch sensor, averaging 30 samples to reduce noise
+ <br> long reading = touchSensor.capacitiveSensor(30);
+ <br> // Converts the sensor reading into a PWM
+ <br> int speed = map(reading, 20, 3000, 0, 255);
+  <br>// Constrains the values within 0 to 255
+ <br> speed = constrain(speed, 0, 255);
+ <br> // Send speed to the motor
+ <br> analogWrite(9, speed);
+ <br> // Print the raw reading for calibration purposes
+ <br> Serial.println(reading);
+ <br> // Wait 20 ms
+  <br>delay(20);
+<br>}
+      </code>
+    </div>
+    <div>
+      <p> <strong> Questions:
+        <br> <strong>1: These are the datasheets for the n-mosfet transistor: DMT6009LCT, IRLZ44N, P30N06LE. 
+        Read the text on your mosfet to see which one you have. For your mosfet, what is the absolute maximum amount of current between pins 2 and 3? </strong>
+        <br>  I used the IRLZ44N. From reading the datasheet, I found that the absolute maximum amount of current between pins 2 and 3 is 47A at 25C.
+        <br> <strong> 2: Draw a schematic for a circuit with using at least your arduino, a DC motor, a flyback diode, 
+        and capacitors between power and ground. Find parts with datasheets you could use for each of these schematic components. </strong>
+        <img src="AISelect_20261112_173011_Samsung Notes.jpg" />
+        <br> <a href="https://www.infineon.com/assets/row/public/documents/24/49/infineon-irlz44n-datasheet-en.pdf">Mosfet</a>
+        <br> <a href="https://www.vishay.com/docs/88503/1n4001.pdf">Diode</a>
+        <br> <a href="https://epow0.org/~amki/car_kit/Datasheet/ELEGOO%20UNO%20R3%20Board.pdf">Arduino</a>
+        <br> <a href="https://www.handsontec.com/dataspecs/motor_fan/130-Motor.pdf">DC Motor</a>
+        <br> <strong> 3: Here is the datasheet for the L293D chip: https://www.ti.com/product/L293D. 
+        Draw a schematic using at least your arduino, this chip, and two motors. Write (pseudo) code that shows how you would move the motors both forward, 
+        both back, then one forward one back, and one back then forward. </strong>
+        <img src="AISelect_20261112_190247_Samsung Notes.jpg" />
+        <br> <code>
+<br> void setup() {
+ <br> // Pin 5 is OUTPUT, enable motor 1
+ <br> pinMode(5, OUTPUT);
+ <br> // Pin 2 is OUTPUT, input 1A
+ <br> pinMode(2, OUTPUT);
+ <br> // Pin 3 is OUTPUT, input 2A
+ <br> pinMode(3, OUTPUT);
+ <br> // Pin 6 is OUTPUT, enable motor 2
+<br>  pinMode(6, OUTPUT);
+<br> // Pin 4 is OUTPUT, input 3A
+ <br> pinMode(4, OUTPUT);
+ <br> // Pin 7 is OUTPUT, input 4A
+ <br> pinMode(7, OUTPUT);
+<br>}
+<br>
+<br>void loop() {
+  <br>// Motor 1 speed
+  <br>analogWrite(5, speed);
+ <br> // Motor 2 speed
+ <br> analogWrite(6, speed);
+<br>
+ <br> //Both forward:
+<br>  digitalWrite(2, HIGH);
+<br>  digitalWrite(3, LOW);
+ <br> digitalWrite(4, HIGH);
+ <br> digitalWrite(7, LOW);
+<br>
+ <br> // Both backward
+  <br>digitalWrite(2, LOW);
+ <br> digitalWrite(3, HIGH);
+<br>  digitalWrite(4, LOW);
+<br>  digitalWrite(7, HIGH);
+
+  <br>// Motor 1 forward, Motor 2 backward
+ <br> digitalWrite(2, HIGH);
+ <br> digitalWrite(3, LOW);
+ <br> digitalWrite(4, LOW);
+ <br> digitalWrite(7, HIGH);
+<br>
+ <br> // Motor 1 backward, Motor 2 forward
+<br>  digitalWrite(2, LOW);
+ <br> digitalWrite(3, HIGH);
+ <br> digitalWrite(4, HIGH);
+ <br> digitalWrite(7, LOW);
+<br>}
+
+        </code>
+        <br> <strong> 4: Did you use AI tools in completing this assignment? If yes, please provide details on how/when, as well as a brief reflection. 
+        If you used an LLM, please 'share' your conversation and include it as part of your submission, or cite the prompt(s) you used and the output. 
+        If no, you can either leave this question blank, or provide other information if you'd like. </strong>
+        <br> I did not use AI to complete this assignment.
+      </p>
+    </div>
+  </body>
+</html>
